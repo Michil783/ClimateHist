@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+   <head>
+      <title>DHT Sensor data </title>
+      <link rel="stylesheet" href='../static/style.css'/>
+   </head>
+   <body>
+	<h3> SENSOR </h3>
+	<p> Select the sensor:
+	<form class="form-inline" action="{{ url_for('my_form_source_post') }}" method="POST">
+		<select name="source" onchange="this.form.submit()">
+			<option value="WeatherNode1" {% if source =="WeatherNode1" %} selected {% endif %}>WeatherNode1</option>
+			<option value="WeatherNode2" {% if source =="WeatherNode2" %} selected {% endif %}>WeatherNode2</option>
+			<option value="WeatherNode3" {% if source =="WeatherNode3" %} selected {% endif %}>WeatherNode3</option>
+		</select>
+	</form></p>
+		<!--
+	<form action="{{ url_for('my_form_source_post') }}" method="POST">
+		<input name="source" value= {{source}}>
+		<input type="submit">
+	</form></p>
+		-->
+	<hr>
+	<h1>Sensor Data {{ source }}</h1>
+	<h3> Temperature     ==>  {{ temp  }} &#8451</h3>
+	<h3> Humidity (Rel.) ==>  {{ hum  }} %</h3>
+	<h3> Pressure        ==>  {{ pres  }} hPa</h3>
+	<h3> Voltage         ==>  {{ volt  }} V</h3>
+	<h3> Battery level   ==>  {{ soc  }}%</h3>
+	<h3> Charging        ==>  {{ charging }} </h3>
+	<hr>
+	<h3> Last Sensors Reading: {{ time }} ==> <a href="/"class="button">REFRESH</a></h3>
+	<h3> actual rows in DB: {{ numMaxSamples }}</h3>
+	<hr>
+	<h3> HISTORICAL DATA </h3>
+	<p> Enter number of days to retrieve:
+	<form action="{{ url_for('my_form_numSamples_post') }}" method="POST">
+		<select name="displayRange" onchange="this.form.submit()">
+			<option value=0 {% if displayRange == 0 %} selected {% endif %}>all</option>
+	        <option value=1 {% if displayRange == 1 %} selected {% endif %}>today</option>
+	        <option value=3 {% if displayRange == 3 %} selected {% endif %}>last 3 days</option>
+	        <option value=5 {% if displayRange == 5 %} selected {% endif %}>last 5 days</option>
+	        <option value=7 {% if displayRange == 7 %} selected {% endif %}>last 7 days</option>
+			<option value=14 {% if displayRange == 14 %} selected {% endif %}>last 14 days</option>
+			<option value=28 {% if displayRange == 28 %} selected {% endif %}>last month</option>
+			<option value=84 {% if displayRange == 84 %} selected {% endif %}>last 3 month</option>
+		</select>
+	</form></p>
+	<hr>
+	<img src="/plot/temp" alt="Image Placeholder" width="20%">
+	<img src="/plot/hum" alt="Image Placeholder" width="20%">
+	<img src="/plot/pres" alt="Image Placeholder" width="20%">
+	<img src="/plot/volt" alt="Image Placeholder" width="20%">
+	<img src="/plot/charging" alt="Image Placeholder" width="20%">
+	<img src="/plot/soc" alt="Image Placeholder" width="20%"></p>
+	<img src="/plot/minmaxtemp" alt="Image Placeholder" width="20%">
+	<img src="/plot/minmaxhum" alt="Image Placeholder" width="20%">
+	<img src="/plot/minmaxpres" alt="Image Placeholder" width="20%">
+	<img src="/plot/minmaxvolt" alt="Image Placeholder" width="20%">
+	<p> @2019 by Michael Leopoldseder</p>
+   </body>
+</html>
